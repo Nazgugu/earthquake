@@ -13,6 +13,8 @@
 		AE3D9CA91C229E7E00E8B44C /* EarthQuakeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D9CA81C229E7E00E8B44C /* EarthQuakeTests.m */; };
 		AE3D9CB41C229E7E00E8B44C /* EarthQuakeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D9CB31C229E7E00E8B44C /* EarthQuakeUITests.m */; };
 		AE3D9CC51C22ACDE00E8B44C /* Pilgiche.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE3D9CC41C22ACDE00E8B44C /* Pilgiche.ttf */; };
+		AE3D9CD41C22B1D400E8B44C /* MainEQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D9CD21C22B1D400E8B44C /* MainEQViewController.m */; };
+		AE3D9CD51C22B1D400E8B44C /* MainEQViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE3D9CD31C22B1D400E8B44C /* MainEQViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,9 @@
 		AE3D9CC21C22AAFA00E8B44C /* CommonDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonDefine.h; sourceTree = "<group>"; };
 		AE3D9CC31C22AAFA00E8B44C /* ValueKeyDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValueKeyDefine.h; sourceTree = "<group>"; };
 		AE3D9CC41C22ACDE00E8B44C /* Pilgiche.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pilgiche.ttf; sourceTree = "<group>"; };
+		AE3D9CD11C22B1D400E8B44C /* MainEQViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainEQViewController.h; path = VCs/MainEQViewController.h; sourceTree = "<group>"; };
+		AE3D9CD21C22B1D400E8B44C /* MainEQViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainEQViewController.m; path = VCs/MainEQViewController.m; sourceTree = "<group>"; };
+		AE3D9CD31C22B1D400E8B44C /* MainEQViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainEQViewController.xib; path = VCs/MainEQViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +169,9 @@
 		AE3D9CCA1C22AD3100E8B44C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				AE3D9CD11C22B1D400E8B44C /* MainEQViewController.h */,
+				AE3D9CD21C22B1D400E8B44C /* MainEQViewController.m */,
+				AE3D9CD31C22B1D400E8B44C /* MainEQViewController.xib */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -271,6 +279,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE3D9CD51C22B1D400E8B44C /* MainEQViewController.xib in Resources */,
 				AE3D9C9B1C229E7E00E8B44C /* Assets.xcassets in Resources */,
 				AE3D9CC51C22ACDE00E8B44C /* Pilgiche.ttf in Resources */,
 			);
@@ -298,6 +307,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE3D9C931C229E7E00E8B44C /* AppDelegate.m in Sources */,
+				AE3D9CD41C22B1D400E8B44C /* MainEQViewController.m in Sources */,
 				AE3D9C901C229E7E00E8B44C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -507,6 +517,7 @@
 				AE3D9CBA1C229E7E00E8B44C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AE3D9CBB1C229E7E00E8B44C /* Build configuration list for PBXNativeTarget "EarthQuakeTests" */ = {
 			isa = XCConfigurationList;
@@ -515,6 +526,7 @@
 				AE3D9CBD1C229E7E00E8B44C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AE3D9CBE1C229E7E00E8B44C /* Build configuration list for PBXNativeTarget "EarthQuakeUITests" */ = {
 			isa = XCConfigurationList;
@@ -523,6 +535,7 @@
 				AE3D9CC01C229E7E00E8B44C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import <CoreLocation/CoreLocation.h>
+#import "MainEQViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +19,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [self requestLocationService];
+    [self setUpWindow];
+    [self setUpNavigationBarStyle];
+    [self setUpMainView];
     return YES;
 }
 
@@ -40,6 +46,37 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - Initialization Steps
+
+- (void)requestLocationService
+{
+    
+}
+
+- (void)setUpWindow
+{
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+}
+
+- (void)setUpNavigationBarStyle
+{
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0.227f green:0.133f blue:0.314f alpha:1.00f]];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setTranslucent:NO];
+    [[UINavigationBar appearance] setOpaque:YES];
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+}
+
+- (void)setUpMainView
+{
+    MainEQViewController *mainEQVC = [[MainEQViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:mainEQVC];
+    self.window.rootViewController = nav;
+    [self.window makeKeyAndVisible];
 }
 
 @end
