@@ -17,6 +17,9 @@
 		AE3D9CD41C22B1D400E8B44C /* MainEQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D9CD21C22B1D400E8B44C /* MainEQViewController.m */; };
 		AE3D9CD51C22B1D400E8B44C /* MainEQViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE3D9CD31C22B1D400E8B44C /* MainEQViewController.xib */; };
 		AE3D9CD81C22B78100E8B44C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE3D9CD71C22B78100E8B44C /* CoreLocation.framework */; };
+		AE3D9CDB1C22B9FA00E8B44C /* ContentScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D9CDA1C22B9FA00E8B44C /* ContentScrollView.m */; };
+		AE3D9CDE1C22BA2000E8B44C /* EarthQuake.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D9CDD1C22BA2000E8B44C /* EarthQuake.m */; };
+		AE3D9CE11C22BA3D00E8B44C /* EarthQuakeFetchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D9CE01C22BA3D00E8B44C /* EarthQuakeFetchManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +60,13 @@
 		AE3D9CD21C22B1D400E8B44C /* MainEQViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainEQViewController.m; path = VCs/MainEQViewController.m; sourceTree = "<group>"; };
 		AE3D9CD31C22B1D400E8B44C /* MainEQViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainEQViewController.xib; path = VCs/MainEQViewController.xib; sourceTree = "<group>"; };
 		AE3D9CD71C22B78100E8B44C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		AE3D9CD91C22B9FA00E8B44C /* ContentScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContentScrollView.h; path = Views/ContentScrollView.h; sourceTree = "<group>"; };
+		AE3D9CDA1C22B9FA00E8B44C /* ContentScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContentScrollView.m; path = Views/ContentScrollView.m; sourceTree = "<group>"; };
+		AE3D9CDC1C22BA2000E8B44C /* EarthQuake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EarthQuake.h; path = Modal/EarthQuake.h; sourceTree = "<group>"; };
+		AE3D9CDD1C22BA2000E8B44C /* EarthQuake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EarthQuake.m; path = Modal/EarthQuake.m; sourceTree = "<group>"; };
+		AE3D9CDF1C22BA3D00E8B44C /* EarthQuakeFetchManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EarthQuakeFetchManager.h; path = Modal/EarthQuakeFetchManager.h; sourceTree = "<group>"; };
+		AE3D9CE01C22BA3D00E8B44C /* EarthQuakeFetchManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EarthQuakeFetchManager.m; path = Modal/EarthQuakeFetchManager.m; sourceTree = "<group>"; };
+		AE3D9CE21C22C04600E8B44C /* EarthQuake.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EarthQuake.pch; sourceTree = "<group>"; };
 		B8B6957663A93D7A7753FFE2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E4353C85F66B3B63970F8E9E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -134,6 +144,9 @@
 				AE3D9CC11C22AAE000E8B44C /* General */,
 				AE3D9C911C229E7E00E8B44C /* AppDelegate.h */,
 				AE3D9C921C229E7E00E8B44C /* AppDelegate.m */,
+				AE3D9CCA1C22AD3100E8B44C /* Controller */,
+				AE3D9CC91C22AD2300E8B44C /* View */,
+				AE3D9CC81C22AD1600E8B44C /* Modal */,
 				AE3D9C9A1C229E7E00E8B44C /* Assets.xcassets */,
 				AE3D9C9F1C229E7E00E8B44C /* Info.plist */,
 				AE3D9C8E1C229E7E00E8B44C /* Supporting Files */,
@@ -146,6 +159,7 @@
 			children = (
 				AE3D9CC41C22ACDE00E8B44C /* Pilgiche.ttf */,
 				AE3D9C8F1C229E7E00E8B44C /* main.m */,
+				AE3D9CE21C22C04600E8B44C /* EarthQuake.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -171,9 +185,6 @@
 		AE3D9CC11C22AAE000E8B44C /* General */ = {
 			isa = PBXGroup;
 			children = (
-				AE3D9CCA1C22AD3100E8B44C /* Controller */,
-				AE3D9CC91C22AD2300E8B44C /* View */,
-				AE3D9CC81C22AD1600E8B44C /* Modal */,
 				AE3D9CC21C22AAFA00E8B44C /* CommonDefine.h */,
 				AE3D9CC31C22AAFA00E8B44C /* ValueKeyDefine.h */,
 			);
@@ -183,6 +194,10 @@
 		AE3D9CC81C22AD1600E8B44C /* Modal */ = {
 			isa = PBXGroup;
 			children = (
+				AE3D9CDC1C22BA2000E8B44C /* EarthQuake.h */,
+				AE3D9CDD1C22BA2000E8B44C /* EarthQuake.m */,
+				AE3D9CDF1C22BA3D00E8B44C /* EarthQuakeFetchManager.h */,
+				AE3D9CE01C22BA3D00E8B44C /* EarthQuakeFetchManager.m */,
 			);
 			name = Modal;
 			sourceTree = "<group>";
@@ -190,6 +205,8 @@
 		AE3D9CC91C22AD2300E8B44C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AE3D9CD91C22B9FA00E8B44C /* ContentScrollView.h */,
+				AE3D9CDA1C22B9FA00E8B44C /* ContentScrollView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -388,6 +405,9 @@
 				AE3D9C931C229E7E00E8B44C /* AppDelegate.m in Sources */,
 				AE3D9CD41C22B1D400E8B44C /* MainEQViewController.m in Sources */,
 				AE3D9C901C229E7E00E8B44C /* main.m in Sources */,
+				AE3D9CDB1C22B9FA00E8B44C /* ContentScrollView.m in Sources */,
+				AE3D9CDE1C22BA2000E8B44C /* EarthQuake.m in Sources */,
+				AE3D9CE11C22BA3D00E8B44C /* EarthQuakeFetchManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,6 +469,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREFIX_HEADER = EarthQuake/EarthQuake.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -490,6 +511,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = EarthQuake/EarthQuake.pch;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;

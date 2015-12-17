@@ -1,0 +1,20 @@
+//
+//  EarthQuake.pch
+//  EarthQuake
+//
+//  Created by Liu Zhe on 12/17/15.
+//  Copyright © 2015 Liu Zhe. All rights reserved.
+//
+
+#ifndef EarthQuake_pch
+#define EarthQuake_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* EarthQuake_pch */
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "CommonDefine.h"
+#endif
