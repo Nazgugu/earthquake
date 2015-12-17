@@ -9,12 +9,10 @@
 /* Begin PBXBuildFile section */
 		AE3D9C901C229E7E00E8B44C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D9C8F1C229E7E00E8B44C /* main.m */; };
 		AE3D9C931C229E7E00E8B44C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D9C921C229E7E00E8B44C /* AppDelegate.m */; };
-		AE3D9C961C229E7E00E8B44C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D9C951C229E7E00E8B44C /* ViewController.m */; };
-		AE3D9C991C229E7E00E8B44C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE3D9C971C229E7E00E8B44C /* Main.storyboard */; };
 		AE3D9C9B1C229E7E00E8B44C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE3D9C9A1C229E7E00E8B44C /* Assets.xcassets */; };
-		AE3D9C9E1C229E7E00E8B44C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE3D9C9C1C229E7E00E8B44C /* LaunchScreen.storyboard */; };
 		AE3D9CA91C229E7E00E8B44C /* EarthQuakeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D9CA81C229E7E00E8B44C /* EarthQuakeTests.m */; };
 		AE3D9CB41C229E7E00E8B44C /* EarthQuakeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D9CB31C229E7E00E8B44C /* EarthQuakeUITests.m */; };
+		AE3D9CC51C22ACDE00E8B44C /* Pilgiche.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE3D9CC41C22ACDE00E8B44C /* Pilgiche.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,11 +37,7 @@
 		AE3D9C8F1C229E7E00E8B44C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AE3D9C911C229E7E00E8B44C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AE3D9C921C229E7E00E8B44C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		AE3D9C941C229E7E00E8B44C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		AE3D9C951C229E7E00E8B44C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		AE3D9C981C229E7E00E8B44C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AE3D9C9A1C229E7E00E8B44C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		AE3D9C9D1C229E7E00E8B44C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AE3D9C9F1C229E7E00E8B44C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE3D9CA41C229E7E00E8B44C /* EarthQuakeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EarthQuakeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE3D9CA81C229E7E00E8B44C /* EarthQuakeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EarthQuakeTests.m; sourceTree = "<group>"; };
@@ -51,6 +45,9 @@
 		AE3D9CAF1C229E7E00E8B44C /* EarthQuakeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EarthQuakeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE3D9CB31C229E7E00E8B44C /* EarthQuakeUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EarthQuakeUITests.m; sourceTree = "<group>"; };
 		AE3D9CB51C229E7E00E8B44C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AE3D9CC21C22AAFA00E8B44C /* CommonDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonDefine.h; sourceTree = "<group>"; };
+		AE3D9CC31C22AAFA00E8B44C /* ValueKeyDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValueKeyDefine.h; sourceTree = "<group>"; };
+		AE3D9CC41C22ACDE00E8B44C /* Pilgiche.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pilgiche.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,13 +98,10 @@
 		AE3D9C8D1C229E7E00E8B44C /* EarthQuake */ = {
 			isa = PBXGroup;
 			children = (
+				AE3D9CC11C22AAE000E8B44C /* General */,
 				AE3D9C911C229E7E00E8B44C /* AppDelegate.h */,
 				AE3D9C921C229E7E00E8B44C /* AppDelegate.m */,
-				AE3D9C941C229E7E00E8B44C /* ViewController.h */,
-				AE3D9C951C229E7E00E8B44C /* ViewController.m */,
-				AE3D9C971C229E7E00E8B44C /* Main.storyboard */,
 				AE3D9C9A1C229E7E00E8B44C /* Assets.xcassets */,
-				AE3D9C9C1C229E7E00E8B44C /* LaunchScreen.storyboard */,
 				AE3D9C9F1C229E7E00E8B44C /* Info.plist */,
 				AE3D9C8E1C229E7E00E8B44C /* Supporting Files */,
 			);
@@ -117,6 +111,7 @@
 		AE3D9C8E1C229E7E00E8B44C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AE3D9CC41C22ACDE00E8B44C /* Pilgiche.ttf */,
 				AE3D9C8F1C229E7E00E8B44C /* main.m */,
 			);
 			name = "Supporting Files";
@@ -138,6 +133,39 @@
 				AE3D9CB51C229E7E00E8B44C /* Info.plist */,
 			);
 			path = EarthQuakeUITests;
+			sourceTree = "<group>";
+		};
+		AE3D9CC11C22AAE000E8B44C /* General */ = {
+			isa = PBXGroup;
+			children = (
+				AE3D9CCA1C22AD3100E8B44C /* Controller */,
+				AE3D9CC91C22AD2300E8B44C /* View */,
+				AE3D9CC81C22AD1600E8B44C /* Modal */,
+				AE3D9CC21C22AAFA00E8B44C /* CommonDefine.h */,
+				AE3D9CC31C22AAFA00E8B44C /* ValueKeyDefine.h */,
+			);
+			name = General;
+			sourceTree = "<group>";
+		};
+		AE3D9CC81C22AD1600E8B44C /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Modal;
+			sourceTree = "<group>";
+		};
+		AE3D9CC91C22AD2300E8B44C /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		AE3D9CCA1C22AD3100E8B44C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,9 +271,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE3D9C9E1C229E7E00E8B44C /* LaunchScreen.storyboard in Resources */,
 				AE3D9C9B1C229E7E00E8B44C /* Assets.xcassets in Resources */,
-				AE3D9C991C229E7E00E8B44C /* Main.storyboard in Resources */,
+				AE3D9CC51C22ACDE00E8B44C /* Pilgiche.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,7 +297,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE3D9C961C229E7E00E8B44C /* ViewController.m in Sources */,
 				AE3D9C931C229E7E00E8B44C /* AppDelegate.m in Sources */,
 				AE3D9C901C229E7E00E8B44C /* main.m in Sources */,
 			);
@@ -306,25 +332,6 @@
 			targetProxy = AE3D9CB01C229E7E00E8B44C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		AE3D9C971C229E7E00E8B44C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AE3D9C981C229E7E00E8B44C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		AE3D9C9C1C229E7E00E8B44C /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AE3D9C9D1C229E7E00E8B44C /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		AE3D9CB61C229E7E00E8B44C /* Debug */ = {
@@ -411,7 +418,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = EarthQuake/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ZL.EarthQuake;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -422,7 +431,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = EarthQuake/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ZL.EarthQuake;
 				PRODUCT_NAME = "$(TARGET_NAME)";
