@@ -6,8 +6,8 @@
 //  Copyright © 2015 Liu Zhe. All rights reserved.
 //
 
-#ifndef jiechu_CommonDefine_h
-#define jiechu_CommonDefine_h
+#ifndef earthquake_CommonDefine_h
+#define earthquake_CommonDefine_h
 
 
 #define IOS7_UP                ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 7.0 ? YES : NO )
@@ -21,9 +21,6 @@
 #define IPHONE5             ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
 
 #define screenBounds [[UIScreen mainScreen] bounds]
-
-#define DEFAULT_FONT        @"STHeitiSC-Medium"
-#define DEFAULT_FONT_LIGHT  @"STHeitiSC-Light"
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
@@ -43,12 +40,5 @@
 
 #define locationGPS @"locationGPS"
 #define locationObtained @"gotGPS"
-
-#define COID @"us-east-1:36b72770-a78b-4777-a817-a20ba8a40f96"
-
-#define PFAPPID @"1EA9tlCTlM4xxhbFvAYaywBW7gttLviUJhCyZTfV"
-#define PFCLIENTKEY @"yU2jQt39VRcpWv8078sl6xF4Z3Kp3ePAyoSesh1o"
-#define GOOGLEAPI @"AIzaSyB4BZiadVUvRiYiR-ACuHtkXY4_hCvKAaM"
-#define SEARCHTYPES @"050000|060000|070000|080000|100000|110000|120000|140000|170000"
 
 #endif
