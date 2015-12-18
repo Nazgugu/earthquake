@@ -75,4 +75,9 @@
     return [formmater stringFromDate:self.time];
 }
 
+- (CLLocationCoordinate2D)getLocation
+{
+    return self.locationCoord;
+}
+
 @end

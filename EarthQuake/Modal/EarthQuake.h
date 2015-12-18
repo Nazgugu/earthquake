@@ -17,4 +17,6 @@
 
 - (NSString *)getTime;
 
+- (CLLocationCoordinate2D)getLocation;
+
 @end

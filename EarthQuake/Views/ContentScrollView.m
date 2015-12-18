@@ -31,6 +31,7 @@
     {
         [self setContentSize:CGSizeMake(SCREEN_WIDTH * 2, self.bounds.size.height)];
         [self setScrollEnabled:NO];
+        [self setPagingEnabled:YES];
     }
     return self;
 }

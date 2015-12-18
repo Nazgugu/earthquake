@@ -10,3 +10,4 @@ pod 'THCalendarDatePicker',     '~>1.2.5'
 pod 'ASValueTrackingSlider',    '~>0.11.2'
 pod 'SVPulsingAnnotationView',  '~>0.3.0'
 pod 'FDFullscreenPopGesture',   '~>1.1'
+pod 'SVWebViewController', :head

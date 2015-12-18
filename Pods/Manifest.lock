@@ -21,6 +21,7 @@ PODS:
   - MJRefresh (3.0.7)
   - Shimmer (1.0.2)
   - SVPulsingAnnotationView (0.3.0)
+  - SVWebViewController (HEAD based on 1.0)
   - THCalendarDatePicker (1.2.5):
     - KNSemiModalViewController_hons82 (~> 0.4.3)
   - WSProgressHUD (1.0.9):
@@ -33,6 +34,7 @@ DEPENDENCIES:
   - HMSegmentedControl (~> 1.5.2)
   - MJRefresh (~> 3.0.7)
   - SVPulsingAnnotationView (~> 0.3.0)
+  - SVWebViewController (HEAD)
   - THCalendarDatePicker (~> 1.2.5)
   - WSProgressHUD (~> 1.0.9)
 
@@ -45,6 +47,7 @@ SPEC CHECKSUMS:
   MJRefresh: f3e1228ec3d38c7ba5208d58032631a52f39f495
   Shimmer: c5374be1c2b0c9e292fb05b339a513cf291cac86
   SVPulsingAnnotationView: f1a8dc7a57ebb5fa231d0ef8b0da59a250005511
+  SVWebViewController: c36dda7326e81fcae0abf5d02bf7bbf7e41be901
   THCalendarDatePicker: 65c63c1814d1a27defc89f4b72ec7a1d01d5503d
   WSProgressHUD: 52769c1da5a1033b2bbe67ceea24ff250a6ca34f
 
