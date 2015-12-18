@@ -7,9 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
+
+typedef void (^EarthquakesBlock)(NSArray *earthquakesArray, NSError *error);
 
 @interface EarthQuakeFetchManager : NSObject
 
 + (instancetype)sharedManager;
+
+- (void)fetchEarthquakesWithLocation:(CLLocationCoordinate2D)locationCoord andRadiusInKM:(CGFloat)radius withPage:(NSInteger)pageNum inBackgroundWithBlock:(EarthquakesBlock)block;
 
 @end

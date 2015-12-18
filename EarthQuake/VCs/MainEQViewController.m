@@ -6,20 +6,29 @@
 //  Copyright © 2015 Liu Zhe. All rights reserved.
 //
 
+#define earthquakeCellId  @"earthquake"
+
 #import "MainEQViewController.h"
 #import "ContentScrollView.h"
 #import "HMSegmentedControl.h"
+#import <MapKit/MapKit.h>
+#import "EarthquakeTableViewCell.h"
 
 typedef NS_OPTIONS(NSInteger, sectionType) {
     sectionTypeTable = 0,
     sectionTypeMap = 1
 };
 
-@interface MainEQViewController ()
+@interface MainEQViewController () <UITableViewDataSource, UITableViewDelegate, MKMapViewDelegate>
 
+@property (nonatomic, strong) UITableView *earthquakeTable;
+@property (nonatomic, assign) NSUInteger currentPageNum;
+@property (nonatomic, strong) MKMapView *earthquakeMap;
 @property (nonatomic, strong) HMSegmentedControl *topSegment;
 @property (nonatomic, strong) ContentScrollView *contentScroll;
 @property (nonatomic, assign) sectionType currentType;
+@property (nonatomic, strong) NSMutableArray *earthquakeTableData;
+@property (nonatomic, strong) NSMutableArray *earthquakeMapData;
 
 @end
 
@@ -31,6 +40,9 @@ typedef NS_OPTIONS(NSInteger, sectionType) {
     if (self)
     {
         _currentType = sectionTypeTable;
+        _earthquakeTableData = [NSMutableArray new];
+        _earthquakeMapData = [NSMutableArray new];
+        _currentPageNum = 1;
     }
     return self;
 }
@@ -88,6 +100,42 @@ typedef NS_OPTIONS(NSInteger, sectionType) {
 }
 
 - (void)setUpContentScrollView
+{
+    _contentScroll = [[ContentScrollView alloc] initWithFrame:CGRectMake(0, self.topSegment.frame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT - self.topSegment.frame.size.height) tableView:_earthquakeTable andMapView:_earthquakeMap];
+    [self.view addSubview:self.contentScroll];
+    self.earthquakeTable.dataSource = self;
+    self.earthquakeTable.delegate = self;
+    self.earthquakeMap.delegate = self;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.earthquakeTableData.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 80.0f;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    EarthquakeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:earthquakeCellId];
+    if (!cell)
+    {
+        cell = [[EarthquakeTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:earthquakeCellId];
+    }
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
 }

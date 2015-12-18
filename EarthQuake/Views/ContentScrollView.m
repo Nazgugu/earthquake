@@ -8,6 +8,12 @@
 
 #import "ContentScrollView.h"
 
+
+@interface ContentScrollView()
+
+
+@end
+
 @implementation ContentScrollView
 
 /*
@@ -18,9 +24,38 @@
 }
 */
 
+- (instancetype)initWithFrame:(CGRect)frame tableView:(UITableView *)tableView andMapView:(MKMapView *)mapView
+{
+    self = [super initWithFrame:frame];
+    if (self)
+    {
+        [self setContentSize:CGSizeMake(SCREEN_WIDTH * 2, self.bounds.size.height)];
+        [self setScrollEnabled:NO];
+        [self setUpTabelView:tableView];
+        [self setUpMapView:mapView];
+    }
+    return self;
+}
+
+- (void)setUpTabelView:(UITableView *)tableView
+{
+    tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.bounds.size.height)];
+    tableView.backgroundColor = [UIColor blackColor];
+    tableView.tableFooterView  = [UIView new];
+    [self addSubview:tableView];
+}
+
+- (void)setUpMapView:(MKMapView *)mapView
+{
+    mapView = [[MKMapView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, self.bounds.size.height)];
+    mapView.showsUserLocation = YES;
+    mapView.clipsToBounds = YES;
+    [self addSubview:mapView];
+}
+
 - (void)changeSectionWithType:(NSInteger )type
 {
-    
+    [self setContentOffset:CGPointMake(type * SCREEN_WIDTH, 0) animated:YES];
 }
 
 @end

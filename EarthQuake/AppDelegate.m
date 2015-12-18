@@ -9,9 +9,10 @@
 #import "AppDelegate.h"
 #import <CoreLocation/CoreLocation.h>
 #import "MainEQViewController.h"
+#import "EarthQuakeFetchManager.h"
 
-@interface AppDelegate ()
-
+@interface AppDelegate ()<CLLocationManagerDelegate>
+@property (strong, nonatomic) CLLocationManager *locationManager;
 @end
 
 @implementation AppDelegate
@@ -19,6 +20,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:locationGPS])
+    {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:locationGPS];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
     [self requestLocationService];
     [self setUpWindow];
     [self setUpNavigationBarStyle];
@@ -52,7 +58,25 @@
 
 - (void)requestLocationService
 {
-    
+    _locationManager = [[CLLocationManager alloc] init];
+    _locationManager.delegate = self;
+    _locationManager.desiredAccuracy = 25.0f;
+    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+    if ([CLLocationManager locationServicesEnabled])
+    {
+        if (status == kCLAuthorizationStatusNotDetermined || status == kCLAuthorizationStatusDenied)
+        {
+            if([_locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
+            {
+                [_locationManager requestWhenInUseAuthorization];
+                [_locationManager startUpdatingLocation];
+            }
+        }
+        else if (status == kCLAuthorizationStatusAuthorizedWhenInUse)
+        {
+            [_locationManager startUpdatingLocation];
+        }
+    }
 }
 
 - (void)setUpWindow
@@ -77,6 +101,20 @@
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:mainEQVC];
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
+}
+
+#pragma mark - CLLocationManagerDelegate
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    [manager stopUpdatingLocation];
+    CLLocation *lastLocation = [locations lastObject];
+    [[EarthQuakeFetchManager sharedManager] fetchEarthquakesWithLocation:lastLocation.coordinate andRadiusInKM:300 withPage:1 inBackgroundWithBlock:^(NSArray *earthquakesArray, NSError *error) {
+        
+    }];
+    NSArray *location = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%lf",lastLocation.coordinate.latitude], [NSString stringWithFormat:@"%lf",lastLocation.coordinate.longitude], nil];
+    [[NSUserDefaults standardUserDefaults] setObject:location forKey:locationGPS];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[NSNotificationCenter defaultCenter] postNotificationName:locationObtained object:nil];
 }
 
 @end

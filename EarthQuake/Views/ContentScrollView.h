@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 
 @interface ContentScrollView : UIScrollView
+
+- (instancetype)initWithFrame:(CGRect)frame tableView:(UITableView *)tableView andMapView:(MKMapView *)mapView;
 
 - (void)changeSectionWithType:(NSInteger )type;
 

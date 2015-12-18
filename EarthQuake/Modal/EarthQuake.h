@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface EarthQuake : NSObject
+
+- (instancetype)initWithDictionary:(NSDictionary *)dict;
 
 @end
