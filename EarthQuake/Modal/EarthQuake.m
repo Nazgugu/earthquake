@@ -59,8 +59,20 @@
 
 - (void)convertTime:(double)epochTime
 {
-    NSTimeInterval seconds = epochTime;
+    NSTimeInterval seconds = epochTime / 1000.0f; //mm second
     _time = [[NSDate alloc] initWithTimeIntervalSince1970:seconds];
+}
+
+- (NSString *)getTitle
+{
+    return self.title;
+}
+
+- (NSString *)getTime
+{
+    NSDateFormatter *formmater = [[NSDateFormatter alloc] init];
+    [formmater setDateFormat:@"yyyy-MM-dd 'at' hh:mm:ss"];
+    return [formmater stringFromDate:self.time];
 }
 
 @end

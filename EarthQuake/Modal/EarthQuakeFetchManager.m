@@ -25,14 +25,15 @@
     return sharedManager;
 }
 
-- (void)fetchEarthquakesWithLocation:(CLLocationCoordinate2D)locationCoord andRadiusInKM:(CGFloat)radius withPage:(NSInteger)pageNum inBackgroundWithBlock:(EarthquakesBlock)block
+- (void)fetchEarthquakesWithLocation:(CLLocationCoordinate2D)locationCoord andRadiusInKM:(CGFloat)radius withPage:(NSInteger)pageNum withStartDate:(NSString *)startDate andEndDate:(NSString *)endDate inBackgroundWithBlock:(EarthquakesBlock)block
 {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [manager.operationQueue cancelAllOperations];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     NSMutableArray *searchResult = [NSMutableArray new];
-    NSString *urlString = [NSString stringWithFormat:@"http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2014-01-01&endtime=2014-10-02&latitude=%lf&longitude=%lf&maxradiuskm=%lf&minmagnitude=3.0&limit=10&offset=%ld&orderby=time",locationCoord.latitude,locationCoord.longitude,radius,pageNum * 10];
-    NSLog(@"url = %@",urlString);
+    NSString *urlString = [NSString stringWithFormat:@"http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=%@&endtime=%@&latitude=%lf&longitude=%lf&maxradiuskm=%lf&minmagnitude=1.0&limit=10&offset=%ld&orderby=magnitude",startDate,endDate,locationCoord.latitude,locationCoord.longitude,radius,pageNum * 10];
+//    NSLog(@"called");
+//    NSLog(@"url = %@",urlString);
     NSURL *url = [NSURL URLWithString:urlString];
     [manager GET:url.absoluteString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (responseObject)

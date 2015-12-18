@@ -24,6 +24,17 @@
 }
 */
 
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self)
+    {
+        [self setContentSize:CGSizeMake(SCREEN_WIDTH * 2, self.bounds.size.height)];
+        [self setScrollEnabled:NO];
+    }
+    return self;
+}
+
 - (instancetype)initWithFrame:(CGRect)frame tableView:(UITableView *)tableView andMapView:(MKMapView *)mapView
 {
     self = [super initWithFrame:frame];
@@ -39,7 +50,7 @@
 
 - (void)setUpTabelView:(UITableView *)tableView
 {
-    tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.bounds.size.height)];
+    tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.bounds.size.height) style:UITableViewStylePlain];
     tableView.backgroundColor = [UIColor blackColor];
     tableView.tableFooterView  = [UIView new];
     [self addSubview:tableView];

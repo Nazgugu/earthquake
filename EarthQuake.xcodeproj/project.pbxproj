@@ -151,7 +151,7 @@
 				AE3D9CC11C22AAE000E8B44C /* General */,
 				AE3D9C911C229E7E00E8B44C /* AppDelegate.h */,
 				AE3D9C921C229E7E00E8B44C /* AppDelegate.m */,
-				AE3D9CCA1C22AD3100E8B44C /* Controller */,
+				AE3D9CCA1C22AD3100E8B44C /* VC */,
 				AE3D9CC91C22AD2300E8B44C /* View */,
 				AE3D9CC81C22AD1600E8B44C /* Modal */,
 				AE3D9C9A1C229E7E00E8B44C /* Assets.xcassets */,
@@ -220,14 +220,14 @@
 			name = View;
 			sourceTree = "<group>";
 		};
-		AE3D9CCA1C22AD3100E8B44C /* Controller */ = {
+		AE3D9CCA1C22AD3100E8B44C /* VC */ = {
 			isa = PBXGroup;
 			children = (
 				AE3D9CD11C22B1D400E8B44C /* MainEQViewController.h */,
 				AE3D9CD21C22B1D400E8B44C /* MainEQViewController.m */,
 				AE3D9CD31C22B1D400E8B44C /* MainEQViewController.xib */,
 			);
-			name = Controller;
+			name = VC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

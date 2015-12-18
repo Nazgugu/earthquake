@@ -22,7 +22,15 @@
 
 - (void)setUp
 {
-    
+    if (IOS9_UP)
+    {
+        self.textLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:17.0f];
+        self.detailTextLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:12.0f];
+    }
+    self.textLabel.numberOfLines = 1;
+    self.detailTextLabel.numberOfLines = 1;
+    self.textLabel.adjustsFontSizeToFitWidth = YES;
+    self.detailTextLabel.adjustsFontSizeToFitWidth = YES;
 }
 
 - (void)awakeFromNib {
@@ -37,7 +45,8 @@
 
 - (void)setUpwithEarthquake:(EarthQuake *)earthquake
 {
-    
+    [self.textLabel setText:[earthquake getTitle]];
+    [self.detailTextLabel setText:[earthquake getTime]];
 }
 
 @end

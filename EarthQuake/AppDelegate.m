@@ -108,9 +108,6 @@
 {
     [manager stopUpdatingLocation];
     CLLocation *lastLocation = [locations lastObject];
-    [[EarthQuakeFetchManager sharedManager] fetchEarthquakesWithLocation:lastLocation.coordinate andRadiusInKM:300 withPage:1 inBackgroundWithBlock:^(NSArray *earthquakesArray, NSError *error) {
-        
-    }];
     NSArray *location = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%lf",lastLocation.coordinate.latitude], [NSString stringWithFormat:@"%lf",lastLocation.coordinate.longitude], nil];
     [[NSUserDefaults standardUserDefaults] setObject:location forKey:locationGPS];
     [[NSUserDefaults standardUserDefaults] synchronize];

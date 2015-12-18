@@ -15,6 +15,6 @@ typedef void (^EarthquakesBlock)(NSArray *earthquakesArray, NSError *error);
 
 + (instancetype)sharedManager;
 
-- (void)fetchEarthquakesWithLocation:(CLLocationCoordinate2D)locationCoord andRadiusInKM:(CGFloat)radius withPage:(NSInteger)pageNum inBackgroundWithBlock:(EarthquakesBlock)block;
+- (void)fetchEarthquakesWithLocation:(CLLocationCoordinate2D)locationCoord andRadiusInKM:(CGFloat)radius withPage:(NSInteger)pageNum withStartDate:(NSString *)startDate andEndDate:(NSString *)endDate inBackgroundWithBlock:(EarthquakesBlock)block;
 
 @end

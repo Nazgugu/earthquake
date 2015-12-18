@@ -13,4 +13,8 @@
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
 
+- (NSString *)getTitle;
+
+- (NSString *)getTime;
+
 @end
