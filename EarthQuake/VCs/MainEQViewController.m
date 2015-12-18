@@ -673,11 +673,11 @@ typedef NS_OPTIONS(NSInteger, dateType) {
     }
     else if (self.dateType == dateTypeEnd)
     {
-        if ([date compare:self.endDate] ==  NSOrderedAscending)
+        if ([date compare:self.startDate] ==  NSOrderedAscending)
         {
             isValid = NO;
         }
-        else if ([date compare:self.endDate] ==  NSOrderedDescending)
+        else if ([date compare:self.startDate] ==  NSOrderedDescending)
         {
             isValid = YES;
         }
