@@ -76,7 +76,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.earthquakeMap setRegion:MKCoordinateRegionMake([self.theEarthequake getLocation], MKCoordinateSpanMake(0.01, 0.01)) animated:YES];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
+    [self.earthquakeMap setRegion:MKCoordinateRegionMake([self.theEarthequake getLocation], MKCoordinateSpanMake(0.1f, 0.1f)) animated:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
 }
 
 - (void)setUpNavigationBar
@@ -88,37 +95,40 @@
 {
     [self.locationAddressLabel setText:[self.theEarthequake getAddress]];
     [self.significanceLabel setText:[NSString stringWithFormat:@"%ld",[self.theEarthequake getSignificance]]];
-    [self.intensityLabel setText:[NSString stringWithFormat:@"%lf", [self.theEarthequake getIntensity]]];
+    [self.intensityLabel setText:[NSString stringWithFormat:@"%.2lf", [self.theEarthequake getIntensity]]];
     [self.timeLabel setText:[self.theEarthequake getTime]];
-    if ([self.theEarthequake getAlert] != nil)
+    NSString *alert = [self.theEarthequake getAlert];
+    if ([alert isEqual: [NSNull null]])
     {
         //four case: green, red, orange, red
-        NSString *alert = [self.theEarthequake getAlert];
-        if ([alert isEqualToString:@"green"])
-        {
-            [self.alertIcon setTintColor:[UIColor greenColor]];
-            [self.alertIcon.titleLabel setTextColor:[UIColor greenColor]];
-        }
-        else if ([alert isEqualToString:@"yellow"])
-        {
-            [self.alertIcon setTintColor:[UIColor yellowColor]];
-            [self.alertIcon.titleLabel setTextColor:[UIColor yellowColor]];
-        }
-        else if ([alert isEqualToString:@"orange"])
-        {
-            [self.alertIcon setTintColor:[UIColor orangeColor]];
-            [self.alertIcon.titleLabel setTextColor:[UIColor orangeColor]];
-        }
-        else if ([alert isEqualToString:@"red"])
-        {
-            [self.alertIcon setTintColor:[UIColor redColor]];
-            [self.alertIcon.titleLabel setTextColor:[UIColor redColor]];
-        }
+        [self.alertIcon setTintColor:[UIColor grayColor]];
+        [self.alertIcon.titleLabel setTextColor:[UIColor grayColor]];
     }
     else
     {
-        [self.alertIcon setTintColor:[UIColor grayColor]];
-        [self.alertIcon.titleLabel setTextColor:[UIColor grayColor]];
+        if (alert && ![alert isEqualToString:@""])
+        {
+            if ([alert isEqualToString:@"green"])
+            {
+                [self.alertIcon setTintColor:[UIColor greenColor]];
+                [self.alertIcon.titleLabel setTextColor:[UIColor greenColor]];
+            }
+            else if ([alert isEqualToString:@"yellow"])
+            {
+                [self.alertIcon setTintColor:[UIColor yellowColor]];
+                [self.alertIcon.titleLabel setTextColor:[UIColor yellowColor]];
+            }
+            else if ([alert isEqualToString:@"orange"])
+            {
+                [self.alertIcon setTintColor:[UIColor orangeColor]];
+                [self.alertIcon.titleLabel setTextColor:[UIColor orangeColor]];
+            }
+            else if ([alert isEqualToString:@"red"])
+            {
+                [self.alertIcon setTintColor:[UIColor redColor]];
+                [self.alertIcon.titleLabel setTextColor:[UIColor redColor]];
+            }
+        }
     }
     
     if ([self.theEarthequake doesHaveTsunami])
@@ -148,19 +158,23 @@
 - (void)initButtons
 {
     _backButton = [[UIButton alloc] initWithFrame:CGRectMake(15, 28, 22, 22)];
-    [self.backButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+    UIImage *backImage = [[UIImage imageNamed:@"back"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [self.backButton setImage:backImage forState:UIControlStateNormal];
+    [self.backButton setTintColor:[UIColor colorWithRed:0.498f green:0.227f blue:0.780f alpha:1.00f]];
     [self.backButton addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.backButton];
     
     _detailButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 15 - 22, 28, 22, 22)];
-    [self.detailButton setImage:[UIImage imageNamed:@"website"] forState:UIControlStateNormal];
+    UIImage *webImage = [[UIImage imageNamed:@"website"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [self.detailButton setImage:webImage forState:UIControlStateNormal];
+    [self.detailButton setTintColor:[UIColor colorWithRed:0.498f green:0.227f blue:0.780f alpha:1.00f]];
     [self.detailButton addTarget:self action:@selector(goToWebsite:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.detailButton];
 }
 
 - (void)setUpScrollView
 {
-    _contentScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT + [UIApplication sharedApplication].statusBarFrame.size.height)];
+    _contentScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, -[UIApplication sharedApplication].statusBarFrame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT + [UIApplication sharedApplication].statusBarFrame.size.height)];
     [self.contentScroll setContentSize:CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT/3.0f + segmentHeight + pagerHeight + gapHeight + sectionLabelHeight + lineHeight + lineGap + propertyIconHeight)];
     self.contentScroll.showsVerticalScrollIndicator = NO;
     [self.view addSubview:self.contentScroll];
@@ -179,16 +193,16 @@
 
 - (void)setUpStrip
 {
-    CGFloat width = SCREEN_WIDTH * 3 / 4;
-    UIView *stripe = [[UIView alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - width) / 2, self.currentYPosition + 47, width, 3)];
+//    CGFloat width = SCREEN_WIDTH * 3 / 4;
+    UIView *stripe = [[UIView alloc] initWithFrame:CGRectMake(0, self.currentYPosition + 47, SCREEN_WIDTH, 3)];
     [stripe setBackgroundColor:[UIColor colorWithRed:0.612f green:0.612f blue:0.612f alpha:1.00f]];
     [self.contentScroll addSubview:stripe];
 }
 
 - (void)setUpSegmentControl
 {
-    CGFloat width = SCREEN_WIDTH * 3 / 4;
-    _sectionSegmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - width) / 2, self.currentYPosition, width, segmentHeight)];
+//    CGFloat width = SCREEN_WIDTH * 3 / 4;
+    _sectionSegmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, self.currentYPosition, SCREEN_WIDTH, segmentHeight)];
     self.sectionSegmentedControl.sectionTitles = @[@"Location", @"Time", @"Significance", @"Intensity"];
     self.sectionSegmentedControl.selectedSegmentIndex = 0;
     self.sectionSegmentedControl.backgroundColor = [UIColor clearColor];
@@ -362,7 +376,7 @@
 {
     ZLAnnotation *earthquakeAnnotation = [[ZLAnnotation alloc] initWithCoordinate:[self.theEarthequake getLocation]];
     earthquakeAnnotation.title = [NSString stringWithFormat:@"Magnitude: %.1lf",[self.theEarthequake getMagnitude]];
-    earthquakeAnnotation.subtitle = [NSString stringWithFormat:@"Depth: %.3f", [self.theEarthequake getDepth]];
+    earthquakeAnnotation.subtitle = [NSString stringWithFormat:@"Depth: %.3f km", [self.theEarthequake getDepth]];
     [self.earthquakeMap addAnnotation:earthquakeAnnotation];
     [mapView selectAnnotation:earthquakeAnnotation animated:YES];
 }

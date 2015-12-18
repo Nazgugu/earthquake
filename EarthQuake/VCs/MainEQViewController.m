@@ -18,6 +18,7 @@
 #import "THDatePickerViewController.h"
 #import "EarthQuakeFetchManager.h"
 #import "RangeSelectionView.h"
+#import "EarthquakeDetailViewController.h"
 
 typedef NS_OPTIONS(NSInteger, sectionType) {
     sectionTypeTable = 0,
@@ -93,6 +94,12 @@ typedef NS_OPTIONS(NSInteger, dateType) {
     {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotLocation) name:locationObtained object:nil];
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
 }
 
 - (void)dealloc
@@ -277,6 +284,7 @@ typedef NS_OPTIONS(NSInteger, dateType) {
     NSArray *userCoord = [[NSUserDefaults standardUserDefaults] objectForKey:locationGPS];
     self.userCoordinate = CLLocationCoordinate2DMake([userCoord[0] doubleValue], [userCoord[1] doubleValue]);
     self.hasLocation = YES;
+    [WSProgressHUD showWithMaskType:WSProgressHUDMaskTypeGradient];
     [self retriveData];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -414,7 +422,9 @@ typedef NS_OPTIONS(NSInteger, dateType) {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    EarthquakeDetailViewController *earthquakeDetail = [[EarthquakeDetailViewController alloc] initWithEarthquake:[self.earthquakeTableData objectAtIndex:indexPath.row]];
+    [self.navigationController pushViewController:earthquakeDetail animated:YES];
 }
 
 #pragma mark - RangeSelectionViewDelegate

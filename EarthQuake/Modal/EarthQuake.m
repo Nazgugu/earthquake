@@ -36,7 +36,7 @@
     {
         NSDictionary *geoDict  = [dict objectForKey:kGeo];
         NSDictionary *propertyDict = [dict objectForKey:kPeoperty];
-        _locationCoord = CLLocationCoordinate2DMake([[[geoDict objectForKey:kCoord] objectAtIndex:0] floatValue], [[[geoDict objectForKey:kCoord] objectAtIndex:1] floatValue]);
+        _locationCoord = CLLocationCoordinate2DMake([[[geoDict objectForKey:kCoord] objectAtIndex:1] floatValue], [[[geoDict objectForKey:kCoord] objectAtIndex:0] floatValue]);
         _depth = [[[geoDict objectForKey:kCoord] objectAtIndex:2] floatValue];
         _locationAddress = [propertyDict objectForKey:kAddress];
         _magnitude = [[propertyDict objectForKey:kMagnitude] floatValue];
