@@ -111,7 +111,7 @@ static CGFloat const kJPSThumbnailAnnotationViewAnimationDuration = 0.25f;
     {
         _titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:17.0f];
     }
-    _titleLabel.minimumScaleFactor = 0.8f;
+    _titleLabel.minimumScaleFactor = 0.5f;
     _titleLabel.adjustsFontSizeToFitWidth = YES;
     [self addSubview:_titleLabel];
 }
@@ -120,7 +120,7 @@ static CGFloat const kJPSThumbnailAnnotationViewAnimationDuration = 0.25f;
     _subtitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(-48.0f, 28.0f, 160.0f, 15.0f)];
     _subtitleLabel.textColor = [UIColor lightGrayColor];
     _subtitleLabel.numberOfLines = 1;
-    _subtitleLabel.minimumScaleFactor = 0.5f;
+    _subtitleLabel.minimumScaleFactor = 0.2f;
     _subtitleLabel.adjustsFontSizeToFitWidth = YES;
     if (IOS8)
     {

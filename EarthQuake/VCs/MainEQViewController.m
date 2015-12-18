@@ -19,6 +19,7 @@
 #import "EarthQuakeFetchManager.h"
 #import "RangeSelectionView.h"
 #import "EarthquakeDetailViewController.h"
+#import "JPSThumbnailAnnotation.h"
 
 typedef NS_OPTIONS(NSInteger, sectionType) {
     sectionTypeTable = 0,
@@ -52,6 +53,17 @@ typedef NS_OPTIONS(NSInteger, dateType) {
 @property (nonatomic, assign) NSInteger dateType;
 @property (nonatomic, strong) UILabel *noDataLabel;
 
+//for map
+@property (nonatomic, assign) CLLocationCoordinate2D userCoord;
+@property (nonatomic, assign) CLLocationCoordinate2D previousLocation;
+@property (nonatomic, assign) MKCoordinateRegion boundingRegion;
+@property (nonatomic, assign) BOOL firstOccuring;
+@property (nonatomic, assign) BOOL nextRegionChangeIsFromUserInteraction;
+@property (nonatomic, assign) BOOL selectAnnotation;
+@property (nonatomic, assign) MKMapRect currentRect;
+@property (nonatomic, strong) NSMutableArray *annotationArr;
+@property (nonatomic, assign) BOOL userLocated;
+
 @end
 
 @implementation MainEQViewController
@@ -62,9 +74,13 @@ typedef NS_OPTIONS(NSInteger, dateType) {
     if (self)
     {
         _hasLocation = NO;
+        _userLocated = NO;
+        _selectAnnotation = NO;
+        _firstOccuring = YES;
         _currentType = sectionTypeTable;
         _earthquakeTableData = [NSMutableArray new];
         _earthquakeMapData = [NSMutableArray new];
+        _annotationArr = [NSMutableArray new];
         _currentPageNum = 1;
         _endDate = [NSDate date];
         _startDate = [_endDate dateByAddingTimeInterval:- 30 * 24 * 60 * 60];//one month period before
@@ -189,8 +205,30 @@ typedef NS_OPTIONS(NSInteger, dateType) {
     [self.topSegment setIndexChangeBlock:^(NSInteger index) {
         weakSelf.currentType = index;
         [weakSelf.contentScroll changeSectionWithType:weakSelf.currentType];
+        [weakSelf changeNavBarButton];
+        if (index == sectionTypeMap)
+        {
+            [weakSelf retriveDataForMap];
+        }
+        else if (index == sectionTypeTable)
+        {
+            [weakSelf.annotationArr removeAllObjects];
+            [weakSelf removeAllPinsButUserLocation];
+        }
     }];
     [self.view addSubview:self.topSegment];
+}
+
+- (void)changeNavBarButton
+{
+    if (self.currentType == sectionTypeTable)
+    {
+        self.navigationItem.rightBarButtonItems = @[self.endCalendarItem, self.magnitudeItem];
+    }
+    else if (self.currentType == sectionTypeMap)
+    {
+        self.navigationItem.rightBarButtonItems = @[self.endCalendarItem];
+    }
 }
 
 - (void)setUpContentScrollView
@@ -369,6 +407,47 @@ typedef NS_OPTIONS(NSInteger, dateType) {
     return;
 }
 
+- (void)retriveDataForMap
+{
+    [WSProgressHUD showWithStatus:@"Fetching" maskType:WSProgressHUDMaskTypeDefault maskWithout:WSProgressHUDMaskWithoutDefault];
+    CLLocationCoordinate2D bottomLeftCoord = [self getSWCoordinate:self.currentRect];
+    CLLocationCoordinate2D topRightCoord = [self getNECoordinate:self.currentRect];
+    double minLat = bottomLeftCoord.latitude;
+    double maxLat = topRightCoord.latitude;
+    double minLong = bottomLeftCoord.longitude;
+    double maxLong = topRightCoord.longitude;
+    [[EarthQuakeFetchManager sharedManager] fetchEarthquakesWithMinLat:minLat maxLat:maxLat minLong:minLong maxLong:maxLong startDate:[self stringFromDate:self.startDate] endDate:[self stringFromDate:self.endDate] inBackgroundWithBlock:^(NSArray *earthquakesArray, NSError *error) {
+        if (!error)
+        {
+            [self removeAllPinsButUserLocation];
+            [self.annotationArr removeAllObjects];
+            if (earthquakesArray.count > 0)
+            {
+                for (EarthQuake *earthquake in earthquakesArray)
+                {
+                    JPSThumbnail *thumbNail = [[JPSThumbnail alloc] initWithLocation:earthquake];
+                    [thumbNail setDisclosureBlock:^{
+                        EarthquakeDetailViewController *detail = [[EarthquakeDetailViewController alloc] initWithEarthquake:earthquake];
+                        [self.navigationController pushViewController:detail animated:YES];
+                    }];
+                    JPSThumbnailAnnotation *annotation = [JPSThumbnailAnnotation annotationWithThumbnail:thumbNail];
+                    [self.annotationArr addObject:annotation];
+                }
+                [WSProgressHUD dismiss];
+                [self.earthquakeMap addAnnotations:self.annotationArr];
+            }
+            else
+            {
+                [WSProgressHUD dismiss];
+            }
+        }
+        else
+        {
+            [WSProgressHUD showErrorWithStatus:@"Network Error"];
+        }
+    }];
+}
+
 - (void)chooseDateStart
 {
     self.dateType = dateTypeStart;
@@ -431,10 +510,13 @@ typedef NS_OPTIONS(NSInteger, dateType) {
 
 - (void)didSelectRange:(CGFloat)range
 {
-    self.radius = range;
-    self.currentPageNum = 1;
-    [WSProgressHUD showWithMaskType:WSProgressHUDMaskTypeGradient];
-    [self retriveData];
+//    if (self.currentType == sectionTypeTable)
+//    {
+        self.radius = range;
+        self.currentPageNum = 1;
+        [WSProgressHUD showWithMaskType:WSProgressHUDMaskTypeGradient];
+        [self retriveData];
+//    }
 }
 
 #pragma mark - THDatePickerDelegate
@@ -459,9 +541,16 @@ typedef NS_OPTIONS(NSInteger, dateType) {
             self.endDate = selectedDate;
         }
         //now need to reset the page to 1 and fetch the data again
-        self.currentPageNum = 1;
-        [WSProgressHUD showWithMaskType:WSProgressHUDMaskTypeGradient];
-        [self retriveData];
+        if (self.currentType == sectionTypeTable)
+        {
+            self.currentPageNum = 1;
+            [WSProgressHUD showWithMaskType:WSProgressHUDMaskTypeGradient];
+            [self retriveData];
+        }
+        else
+        {
+            [self retriveDataForMap];
+        }
     }
     else
     {
@@ -488,6 +577,77 @@ typedef NS_OPTIONS(NSInteger, dateType) {
                                                                   KNSemiModalOptionKeys.animationDuration : @(0.3),
                                                                   KNSemiModalOptionKeys.shadowOpacity     : @(0.2),
                                                                   }];
+}
+
+#pragma mark - MKMapViewDelegate
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
+{
+    if (self.firstOccuring)
+    {
+        if (!self.userLocated)
+        {
+            self.userCoord = userLocation.coordinate;
+            [mapView setRegion:MKCoordinateRegionMake(userLocation.coordinate, MKCoordinateSpanMake(0.015f, 0.015f)) animated:YES];
+            self.currentRect = [self MKMapRectForCoordinateRegion:MKCoordinateRegionMake(userLocation.coordinate, MKCoordinateSpanMake(0.015f, 0.015f))];
+            self.userLocated = YES;
+            self.firstOccuring = NO;
+            self.nextRegionChangeIsFromUserInteraction = YES;
+            self.previousLocation = userLocation.location.coordinate;
+            [self retriveDataForMap];
+        }
+    }
+}
+
+- (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated
+{
+    //NSLog(@"view will");
+    UIView* view = mapView.subviews.firstObject;
+    //	Look through gesture recognizers to determine
+    //	whether this region change is from user interaction
+    for(UIGestureRecognizer* recognizer in view.gestureRecognizers)
+    {
+        //	The user caused of this...
+        if(recognizer.state == UIGestureRecognizerStateBegan
+           || recognizer.state == UIGestureRecognizerStateEnded)
+        {
+            self.nextRegionChangeIsFromUserInteraction = YES;
+            break;
+        }
+    }
+}
+
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
+{
+    if(self.nextRegionChangeIsFromUserInteraction)
+    {
+        //        NSLog(@"called");
+        [self checkIfLargeSpan:_previousLocation andCurrentLocation:mapView.centerCoordinate];
+        self.previousLocation = mapView.centerCoordinate;
+        self.nextRegionChangeIsFromUserInteraction = NO;
+        //NSLog(@"did change region from user");
+        //	Perform code here
+    }
+}
+
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    if ([view conformsToProtocol:@protocol(JPSThumbnailAnnotationViewProtocol)]) {
+        self.selectAnnotation = YES;
+        [((NSObject<JPSThumbnailAnnotationViewProtocol> *)view) didSelectAnnotationViewInMap:mapView];
+    }
+}
+
+- (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
+    if ([view conformsToProtocol:@protocol(JPSThumbnailAnnotationViewProtocol)]) {
+        self.selectAnnotation = YES;
+        [((NSObject<JPSThumbnailAnnotationViewProtocol> *)view) didDeselectAnnotationViewInMap:mapView];
+    }
+}
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    if ([annotation conformsToProtocol:@protocol(JPSThumbnailAnnotationProtocol)]) {
+        return [((NSObject<JPSThumbnailAnnotationProtocol> *)annotation) annotationViewInMap:mapView];
+    }
+    return nil;
 }
 
 
@@ -534,6 +694,69 @@ typedef NS_OPTIONS(NSInteger, dateType) {
     NSDateFormatter *formmater = [[NSDateFormatter alloc] init];
     [formmater setDateFormat:@"yyyy-MM-dd"];
     return [formmater stringFromDate:date];
+}
+
+//convenient methods
+
+-(CLLocationCoordinate2D)getSWCoordinate:(MKMapRect)mRect{
+    return [self getCoordinateFromMapRectanglePoint:mRect.origin.x y:MKMapRectGetMaxY(mRect)];
+}
+
+-(CLLocationCoordinate2D)getNECoordinate:(MKMapRect)mRect{
+    return [self getCoordinateFromMapRectanglePoint:MKMapRectGetMaxX(mRect) y:mRect.origin.y];
+}
+
+-(CLLocationCoordinate2D)getCoordinateFromMapRectanglePoint:(double)x y:(double)y{
+    MKMapPoint swMapPoint = MKMapPointMake(x, y);
+    return MKCoordinateForMapPoint(swMapPoint);
+}
+
+- (MKMapRect)MKMapRectForCoordinateRegion:(MKCoordinateRegion)region
+{
+    MKMapPoint a = MKMapPointForCoordinate(CLLocationCoordinate2DMake(
+                                                                      region.center.latitude + region.span.latitudeDelta / 2,
+                                                                      region.center.longitude - region.span.longitudeDelta / 2));
+    MKMapPoint b = MKMapPointForCoordinate(CLLocationCoordinate2DMake(
+                                                                      region.center.latitude - region.span.latitudeDelta / 2,
+                                                                      region.center.longitude + region.span.longitudeDelta / 2));
+    return MKMapRectMake(MIN(a.x,b.x), MIN(a.y,b.y), ABS(a.x-b.x), ABS(a.y-b.y));
+}
+
+- (void)removeAllPinsButUserLocation
+{
+    id userLocation = [self.earthquakeMap userLocation];
+    NSMutableArray *pins = [[NSMutableArray alloc] initWithArray:[self.earthquakeMap annotations]];
+    if ( userLocation != nil ) {
+        [pins removeObject:userLocation]; // avoid removing user location off the map
+    }
+    
+    [self.earthquakeMap removeAnnotations:pins];
+}
+
+- (void)checkIfLargeSpan:(CLLocationCoordinate2D)previousLocation andCurrentLocation:(CLLocationCoordinate2D)currentLocation
+{
+    if (self.selectAnnotation)
+    {
+        self.selectAnnotation = NO;
+    }
+    else
+    {
+        float latDelta = fabs(previousLocation.latitude - currentLocation.latitude);
+        //NSLog(@"lat delta = %lf",latDelta);
+        float lngDelta = fabs(previousLocation.longitude - previousLocation.longitude);
+        //NSLog(@"long delta = %lf",latDelta);
+        //this case need to refresh the map with data
+        if ((latDelta > 0.005) || (lngDelta > 0.005))
+        {
+//            NSLog(@"need refresh search");
+            self.currentRect = self.earthquakeMap.visibleMapRect;
+            [self retriveDataForMap];
+        }
+//        else
+//        {
+//            NSLog(@"no need");
+//        }
+    }
 }
 
 /*
