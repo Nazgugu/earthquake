@@ -57,6 +57,31 @@
     return self;
 }
 
+- (NSString *)getAddress
+{
+    return self.locationAddress;
+}
+
+- (NSInteger)getSignificance
+{
+    return self.significance;
+}
+
+- (CGFloat)getIntensity
+{
+    return self.maxInstrumentalIntensity;
+}
+
+- (BOOL)doesHaveTsunami
+{
+    return self.hasTsunami;
+}
+
+- (NSString *)getAlert
+{
+    return self.alert;
+}
+
 - (void)convertTime:(double)epochTime
 {
     NSTimeInterval seconds = epochTime / 1000.0f; //mm second
@@ -78,6 +103,21 @@
 - (CLLocationCoordinate2D)getLocation
 {
     return self.locationCoord;
+}
+
+- (NSURL *)getDetailWebAddress
+{
+    return [NSURL URLWithString:self.webURL];
+}
+
+- (CGFloat)getMagnitude
+{
+    return self.magnitude;
+}
+
+- (CGFloat)getDepth
+{
+    return self.depth;
 }
 
 @end

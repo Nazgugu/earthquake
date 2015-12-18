@@ -27,6 +27,7 @@
 		AE3D9CF21C23EB7A00E8B44C /* EarthquakeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D9CF01C23EB7A00E8B44C /* EarthquakeDetailViewController.m */; };
 		AE3D9CF31C23EB7A00E8B44C /* EarthquakeDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE3D9CF11C23EB7A00E8B44C /* EarthquakeDetailViewController.xib */; };
 		AE3D9CF81C240B5C00E8B44C /* FlexibleAlignButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D9CF71C240B5C00E8B44C /* FlexibleAlignButton.m */; };
+		AE3D9CFB1C24147100E8B44C /* ZLAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D9CFA1C24147100E8B44C /* ZLAnnotation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,8 @@
 		AE3D9CF11C23EB7A00E8B44C /* EarthquakeDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EarthquakeDetailViewController.xib; path = VCs/EarthquakeDetailViewController.xib; sourceTree = "<group>"; };
 		AE3D9CF61C240B5C00E8B44C /* FlexibleAlignButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlexibleAlignButton.h; sourceTree = "<group>"; };
 		AE3D9CF71C240B5C00E8B44C /* FlexibleAlignButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlexibleAlignButton.m; sourceTree = "<group>"; };
+		AE3D9CF91C24147100E8B44C /* ZLAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZLAnnotation.h; path = Modal/ZLAnnotation.h; sourceTree = "<group>"; };
+		AE3D9CFA1C24147100E8B44C /* ZLAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZLAnnotation.m; path = Modal/ZLAnnotation.m; sourceTree = "<group>"; };
 		B8B6957663A93D7A7753FFE2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E4353C85F66B3B63970F8E9E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -220,6 +223,8 @@
 				AE3D9CDD1C22BA2000E8B44C /* EarthQuake.m */,
 				AE3D9CDF1C22BA3D00E8B44C /* EarthQuakeFetchManager.h */,
 				AE3D9CE01C22BA3D00E8B44C /* EarthQuakeFetchManager.m */,
+				AE3D9CF91C24147100E8B44C /* ZLAnnotation.h */,
+				AE3D9CFA1C24147100E8B44C /* ZLAnnotation.m */,
 			);
 			name = Modal;
 			sourceTree = "<group>";
@@ -465,6 +470,7 @@
 				AE3D9CD41C22B1D400E8B44C /* MainEQViewController.m in Sources */,
 				AE3D9C901C229E7E00E8B44C /* main.m in Sources */,
 				AE3D9CDB1C22B9FA00E8B44C /* ContentScrollView.m in Sources */,
+				AE3D9CFB1C24147100E8B44C /* ZLAnnotation.m in Sources */,
 				AE3D9CDE1C22BA2000E8B44C /* EarthQuake.m in Sources */,
 				AE3D9CEE1C23D9C800E8B44C /* UIImage+ImageEffects.m in Sources */,
 				AE3D9CEA1C23D8BB00E8B44C /* RangeSelectionView.m in Sources */,

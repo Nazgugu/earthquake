@@ -15,11 +15,16 @@
 #define lineHeight                  3.0f
 #define propertyIconHeight          65.0f
 
+#define earthquakeAnnotaionReuseID      @"earthquakeAnno"
+
 #import "EarthquakeDetailViewController.h"
 #import <MapKit/MapKit.h>
 #import "HMSegmentedControl.h"
 #import "UINavigationController+FDFullscreenPopGesture.h"
 #import "FlexibleAlignButton.h"
+#import "SVWebViewController.h"
+#import "ZLAnnotation.h"
+#import "SVPulsingAnnotationView.h"
 
 @interface EarthquakeDetailViewController ()<MKMapViewDelegate, UIScrollViewDelegate>
 
@@ -65,6 +70,7 @@
     [self setUpNavigationBar];
     [self setUpViews];
     [self initButtons];
+    [self setUpEarthquakeDetail];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -78,6 +84,55 @@
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
+- (void)setUpEarthquakeDetail
+{
+    [self.locationAddressLabel setText:[self.theEarthequake getAddress]];
+    [self.significanceLabel setText:[NSString stringWithFormat:@"%ld",[self.theEarthequake getSignificance]]];
+    [self.intensityLabel setText:[NSString stringWithFormat:@"%lf", [self.theEarthequake getIntensity]]];
+    [self.timeLabel setText:[self.theEarthequake getTime]];
+    if ([self.theEarthequake getAlert] != nil)
+    {
+        //four case: green, red, orange, red
+        NSString *alert = [self.theEarthequake getAlert];
+        if ([alert isEqualToString:@"green"])
+        {
+            [self.alertIcon setTintColor:[UIColor greenColor]];
+            [self.alertIcon.titleLabel setTextColor:[UIColor greenColor]];
+        }
+        else if ([alert isEqualToString:@"yellow"])
+        {
+            [self.alertIcon setTintColor:[UIColor yellowColor]];
+            [self.alertIcon.titleLabel setTextColor:[UIColor yellowColor]];
+        }
+        else if ([alert isEqualToString:@"orange"])
+        {
+            [self.alertIcon setTintColor:[UIColor orangeColor]];
+            [self.alertIcon.titleLabel setTextColor:[UIColor orangeColor]];
+        }
+        else if ([alert isEqualToString:@"red"])
+        {
+            [self.alertIcon setTintColor:[UIColor redColor]];
+            [self.alertIcon.titleLabel setTextColor:[UIColor redColor]];
+        }
+    }
+    else
+    {
+        [self.alertIcon setTintColor:[UIColor grayColor]];
+        [self.alertIcon.titleLabel setTextColor:[UIColor grayColor]];
+    }
+    
+    if ([self.theEarthequake doesHaveTsunami])
+    {
+        [self.tsunamiIcon setTintColor:[UIColor blueColor]];
+        [self.tsunamiIcon.titleLabel setTextColor:[UIColor blueColor]];
+    }
+    else
+    {
+        [self.tsunamiIcon setTintColor:[UIColor grayColor]];
+        [self.tsunamiIcon.titleLabel setTextColor:[UIColor grayColor]];
+    }
+}
+
 - (void)setUpViews
 {
     [self setUpScrollView];
@@ -88,7 +143,6 @@
     [self setUpLabelWithText:@"Properties"];
     [self setUpLine];
     [self setUpPropertyView];
-    [self initButtons];
 }
 
 - (void)initButtons
@@ -100,7 +154,7 @@
     
     _detailButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 15 - 22, 28, 22, 22)];
     [self.detailButton setImage:[UIImage imageNamed:@"website"] forState:UIControlStateNormal];
-    [self.detailButton addTarget:self action:@selector(goToWebsite:) forControlEvents:UIControlStateNormal];
+    [self.detailButton addTarget:self action:@selector(goToWebsite:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.detailButton];
 }
 
@@ -302,6 +356,37 @@
     self.currentYPosition += lineGap;
 }
 
+#pragma mark - MKMapViewDelegate
+
+- (void)mapViewDidFinishRenderingMap:(MKMapView *)mapView fullyRendered:(BOOL)fullyRendered
+{
+    ZLAnnotation *earthquakeAnnotation = [[ZLAnnotation alloc] initWithCoordinate:[self.theEarthequake getLocation]];
+    earthquakeAnnotation.title = [NSString stringWithFormat:@"Magnitude: %.1lf",[self.theEarthequake getMagnitude]];
+    earthquakeAnnotation.subtitle = [NSString stringWithFormat:@"Depth: %.3f", [self.theEarthequake getDepth]];
+    [self.earthquakeMap addAnnotation:earthquakeAnnotation];
+    [mapView selectAnnotation:earthquakeAnnotation animated:YES];
+}
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    if ([annotation isKindOfClass:[ZLAnnotation class]])
+    {
+        SVPulsingAnnotationView *pulsingView = (SVPulsingAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:earthquakeAnnotaionReuseID];
+        if (!pulsingView)
+        {
+            pulsingView = [[SVPulsingAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:earthquakeAnnotaionReuseID];
+            pulsingView.annotationColor = [UIColor colorWithRed:0.678431 green:0 blue:0 alpha:1];
+            pulsingView.canShowCallout = YES;
+        }
+        return pulsingView;
+    }
+    return nil;
+}
+
+- (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view
+{
+    [mapView selectAnnotation:view.annotation animated:NO];
+}
+
 #pragma mark - button action
 - (void)goBack:(UIButton *)sender
 {
@@ -310,7 +395,8 @@
 
 - (void)goToWebsite:(UIButton *)sender
 {
-    
+    SVWebViewController *earthquakeDetail = [[SVWebViewController alloc] initWithURL:[self.theEarthequake getDetailWebAddress]];
+    [self.navigationController pushViewController:earthquakeDetail animated:YES];
 }
 
 #pragma mark - UIScrollViewDelegate

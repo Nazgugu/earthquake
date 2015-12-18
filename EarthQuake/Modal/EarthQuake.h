@@ -17,6 +17,22 @@
 
 - (NSString *)getTime;
 
+- (NSString *)getAddress;
+
+- (NSInteger)getSignificance;
+
+- (CGFloat)getIntensity;
+
+- (BOOL)doesHaveTsunami;
+
+- (NSString *)getAlert;
+
 - (CLLocationCoordinate2D)getLocation;
+
+- (NSURL *)getDetailWebAddress;
+
+- (CGFloat)getMagnitude;
+
+- (CGFloat)getDepth;
 
 @end
