@@ -17,6 +17,7 @@
 #import "WSProgressHUD.h"
 #import "THDatePickerViewController.h"
 #import "EarthQuakeFetchManager.h"
+#import "RangeSelectionView.h"
 
 typedef NS_OPTIONS(NSInteger, sectionType) {
     sectionTypeTable = 0,
@@ -28,7 +29,7 @@ typedef NS_OPTIONS(NSInteger, dateType) {
     dateTypeEnd = 1
 };
 
-@interface MainEQViewController () <UITableViewDataSource, UITableViewDelegate, MKMapViewDelegate, THDatePickerDelegate>
+@interface MainEQViewController () <UITableViewDataSource, UITableViewDelegate, MKMapViewDelegate, THDatePickerDelegate, RangeSelectionViewDelegate>
 
 @property (nonatomic, strong) UITableView *earthquakeTable;
 @property (nonatomic, assign) NSUInteger currentPageNum;
@@ -42,11 +43,13 @@ typedef NS_OPTIONS(NSInteger, dateType) {
 @property (nonatomic, strong) NSMutableArray *earthquakeTableData;
 @property (nonatomic, strong) NSMutableArray *earthquakeMapData;
 @property (nonatomic, strong) UIBarButtonItem *startCalendarItem;
+@property (nonatomic, strong) UIBarButtonItem *magnitudeItem;
 @property (nonatomic, strong) UIBarButtonItem *endCalendarItem;
 @property (nonatomic, strong) NSDate *startDate;
 @property (nonatomic, strong) NSDate *endDate;
 @property (nonatomic, assign) CGFloat radius;
 @property (nonatomic, assign) NSInteger dateType;
+@property (nonatomic, strong) UILabel *noDataLabel;
 
 @end
 
@@ -135,7 +138,12 @@ typedef NS_OPTIONS(NSInteger, dateType) {
     [endButton sizeToFit];
     [endButton addTarget:self action:@selector(chooseDateEnd) forControlEvents:UIControlEventTouchUpInside];
     _endCalendarItem = [[UIBarButtonItem alloc] initWithCustomView:endButton];
-    self.navigationItem.rightBarButtonItem = self.endCalendarItem;
+    UIButton *sliderButton = [[UIButton alloc] init];
+    [sliderButton setImage:[UIImage imageNamed:@"sliderIcon"] forState:UIControlStateNormal];
+    [sliderButton sizeToFit];
+    [sliderButton addTarget:self action:@selector(showSliderView) forControlEvents:UIControlEventTouchUpInside];
+    _magnitudeItem = [[UIBarButtonItem alloc] initWithCustomView:sliderButton];
+    self.navigationItem.rightBarButtonItems = @[self.endCalendarItem, self.magnitudeItem];
 
 }
 
@@ -182,8 +190,27 @@ typedef NS_OPTIONS(NSInteger, dateType) {
 {
     _contentScroll = [[ContentScrollView alloc] initWithFrame:CGRectMake(0, self.topSegment.frame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT - self.topSegment.frame.size.height)];
     [self.view addSubview:self.contentScroll];
+    [self setUpNoDataLabel];
     [self setUpTableView];
     [self setUpMapView];
+}
+
+- (void)setUpNoDataLabel
+{
+    _noDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, (self.contentScroll.frame.size.height - 50) / 2, SCREEN_WIDTH, 50)];
+    self.noDataLabel.textColor = [UIColor lightGrayColor];
+    self.noDataLabel.textAlignment = NSTextAlignmentCenter;
+    if (IOS9_UP)
+    {
+        self.noDataLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:24.0f];
+    }
+    else
+    {
+        self.noDataLabel.font = [UIFont systemFontOfSize:24.0f];
+    }
+    [self.noDataLabel setText:@"No Earthquake In This Area"];
+    self.noDataLabel.hidden = YES;
+    [self.contentScroll addSubview:self.noDataLabel];
 }
 
 - (void)setUpTableView
@@ -236,6 +263,14 @@ typedef NS_OPTIONS(NSInteger, dateType) {
     self.earthquakeTable.mj_footer = footer;
 }
 
+- (void)showSliderView
+{
+    RangeSelectionView *rangeSelection = [[RangeSelectionView alloc] init];
+    rangeSelection.delegate = self;
+    [rangeSelection setSliderWithCurrentRange:self.radius];
+    [rangeSelection show];
+}
+
 - (void)gotLocation
 {
 //    NSLog(@"here");
@@ -260,7 +295,7 @@ typedef NS_OPTIONS(NSInteger, dateType) {
         [[EarthQuakeFetchManager sharedManager] fetchEarthquakesWithLocation:self.userCoordinate andRadiusInKM:self.radius withPage:self.currentPageNum withStartDate:[self stringFromDate:self.startDate] andEndDate:[self stringFromDate:self.endDate] inBackgroundWithBlock:^(NSArray *earthquakesArray, NSError *error) {
             if (earthquakesArray)
             {
-                NSLog(@"count = %ld",earthquakesArray.count);
+//                NSLog(@"count = %ld",earthquakesArray.count);
                 if (self.currentPageNum == 1)
                 {
                     [self.earthquakeTableData removeAllObjects];
@@ -272,9 +307,21 @@ typedef NS_OPTIONS(NSInteger, dateType) {
                     if (earthquakesArray.count < 10)
                     {
                         self.earthquakeTable.mj_footer.hidden = YES;
+                        if (earthquakesArray.count == 0)
+                        {
+                            self.earthquakeTable.hidden = YES;
+                            self.noDataLabel.hidden = NO;
+                        }
+                        else
+                        {
+                            self.earthquakeTable.hidden = NO;
+                            self.noDataLabel.hidden = YES;
+                        }
                     }
                     else
                     {
+                        self.earthquakeTable.hidden = NO;
+                        self.noDataLabel.hidden = YES;
                         self.currentPageNum ++;
                     }
                 }
@@ -370,6 +417,16 @@ typedef NS_OPTIONS(NSInteger, dateType) {
     
 }
 
+#pragma mark - RangeSelectionViewDelegate
+
+- (void)didSelectRange:(CGFloat)range
+{
+    self.radius = range;
+    self.currentPageNum = 1;
+    [WSProgressHUD showWithMaskType:WSProgressHUDMaskTypeGradient];
+    [self retriveData];
+}
+
 #pragma mark - THDatePickerDelegate
 
 - (void)datePickerDonePressed:(THDatePickerViewController *)datePicker {
@@ -409,13 +466,18 @@ typedef NS_OPTIONS(NSInteger, dateType) {
             self.datePicker.date = self.endDate;
         }
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self presentSemiViewController:self.datePicker withOptions:@{
-                                                                          KNSemiModalOptionKeys.pushParentBack    : @(NO),
-                                                                          KNSemiModalOptionKeys.animationDuration : @(0.3),
-                                                                          KNSemiModalOptionKeys.shadowOpacity     : @(0.2),
-                                                                          }];
+            [self performSelector:@selector(presentPicker) withObject:nil afterDelay:0.5f];
         });
     }
+}
+
+- (void)presentPicker
+{
+    [self presentSemiViewController:self.datePicker withOptions:@{
+                                                                  KNSemiModalOptionKeys.pushParentBack    : @(NO),
+                                                                  KNSemiModalOptionKeys.animationDuration : @(0.3),
+                                                                  KNSemiModalOptionKeys.shadowOpacity     : @(0.2),
+                                                                  }];
 }
 
 

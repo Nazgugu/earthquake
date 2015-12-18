@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '268B83DAA8F7E24A468A6480'
-               BlueprintName = 'HMSegmentedControl'
+               BlueprintIdentifier = '1D1D3AF7B6C98D85FA283A00'
+               BlueprintName = 'ASValueTrackingSlider'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libHMSegmentedControl.a'>
+               BuildableName = 'libASValueTrackingSlider.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

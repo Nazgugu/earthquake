@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>ASValueTrackingSlider.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>HMSegmentedControl.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -47,12 +52,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>2439ADC90BD6A4BCF073224BB4F7C2C3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>2AB49797D14D57FA43A345254AFB9F18</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5C003535DAAA515C767F3A52A453D4F6</key>
+		<key>494CAD43F008725B0AC0D6D42FEF8A43</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8C98DDBDF5F7935F1E50E56E6376BDE4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -62,27 +77,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>90BFE76C0B4CCFA84F77B88CB2AFE062</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>928353533005A4198EBDA5B700D37B64</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>B0D11334C5005D7FF23C3BC0FE86B92A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>CBC37CE27BB3DBCE4913C2FB1767FC94</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>DB7E22577DB134A9AA7F569FFA85B522</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>DDD64EA8AB3E8371F5AAD88030960311</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FB5812F327BBA4A98124723972A84331</key>
 		<dict>
 			<key>primary</key>
 			<true/>

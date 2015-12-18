@@ -14,6 +14,7 @@ PODS:
   - AFNetworking/Serialization (3.0.3)
   - AFNetworking/UIKit (3.0.3):
     - AFNetworking/NSURLSession
+  - ASValueTrackingSlider (0.11.2)
   - HMSegmentedControl (1.5.2)
   - KNSemiModalViewController_hons82 (0.4.4)
   - MJRefresh (3.0.7)
@@ -25,6 +26,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - ASValueTrackingSlider (~> 0.11.2)
   - HMSegmentedControl (~> 1.5.2)
   - MJRefresh (~> 3.0.7)
   - THCalendarDatePicker (~> 1.2.5)
@@ -32,6 +34,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: ba06eb9f27de596808c0acc09e1c920cb1d17ab4
+  ASValueTrackingSlider: 45c9f78252da60de01d8f2afe869aaf90dd978d9
   HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
   KNSemiModalViewController_hons82: 22aead5ef5d8ca749bc1babb43fa7d6f14b030a3
   MJRefresh: f3e1228ec3d38c7ba5208d58032631a52f39f495

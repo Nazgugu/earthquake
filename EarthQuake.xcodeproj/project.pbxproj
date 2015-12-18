@@ -22,6 +22,8 @@
 		AE3D9CE11C22BA3D00E8B44C /* EarthQuakeFetchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D9CE01C22BA3D00E8B44C /* EarthQuakeFetchManager.m */; };
 		AE3D9CE41C237EF700E8B44C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE3D9CE31C237EF700E8B44C /* MapKit.framework */; };
 		AE3D9CE71C23843100E8B44C /* EarthquakeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D9CE61C23843100E8B44C /* EarthquakeTableViewCell.m */; };
+		AE3D9CEA1C23D8BB00E8B44C /* RangeSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D9CE91C23D8BB00E8B44C /* RangeSelectionView.m */; };
+		AE3D9CEE1C23D9C800E8B44C /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D9CED1C23D9C800E8B44C /* UIImage+ImageEffects.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +74,10 @@
 		AE3D9CE31C237EF700E8B44C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		AE3D9CE51C23843100E8B44C /* EarthquakeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EarthquakeTableViewCell.h; path = Views/EarthquakeTableViewCell.h; sourceTree = "<group>"; };
 		AE3D9CE61C23843100E8B44C /* EarthquakeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EarthquakeTableViewCell.m; path = Views/EarthquakeTableViewCell.m; sourceTree = "<group>"; };
+		AE3D9CE81C23D8BB00E8B44C /* RangeSelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RangeSelectionView.h; path = Views/RangeSelectionView.h; sourceTree = "<group>"; };
+		AE3D9CE91C23D8BB00E8B44C /* RangeSelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RangeSelectionView.m; path = Views/RangeSelectionView.m; sourceTree = "<group>"; };
+		AE3D9CEC1C23D9C800E8B44C /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		AE3D9CED1C23D9C800E8B44C /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		B8B6957663A93D7A7753FFE2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E4353C85F66B3B63970F8E9E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -192,6 +198,7 @@
 		AE3D9CC11C22AAE000E8B44C /* General */ = {
 			isa = PBXGroup;
 			children = (
+				AE3D9CEB1C23D9B600E8B44C /* Vendors */,
 				AE3D9CC21C22AAFA00E8B44C /* CommonDefine.h */,
 				AE3D9CC31C22AAFA00E8B44C /* ValueKeyDefine.h */,
 			);
@@ -216,6 +223,8 @@
 				AE3D9CDA1C22B9FA00E8B44C /* ContentScrollView.m */,
 				AE3D9CE51C23843100E8B44C /* EarthquakeTableViewCell.h */,
 				AE3D9CE61C23843100E8B44C /* EarthquakeTableViewCell.m */,
+				AE3D9CE81C23D8BB00E8B44C /* RangeSelectionView.h */,
+				AE3D9CE91C23D8BB00E8B44C /* RangeSelectionView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -228,6 +237,15 @@
 				AE3D9CD31C22B1D400E8B44C /* MainEQViewController.xib */,
 			);
 			name = VC;
+			sourceTree = "<group>";
+		};
+		AE3D9CEB1C23D9B600E8B44C /* Vendors */ = {
+			isa = PBXGroup;
+			children = (
+				AE3D9CEC1C23D9C800E8B44C /* UIImage+ImageEffects.h */,
+				AE3D9CED1C23D9C800E8B44C /* UIImage+ImageEffects.m */,
+			);
+			name = Vendors;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -416,6 +434,8 @@
 				AE3D9C901C229E7E00E8B44C /* main.m in Sources */,
 				AE3D9CDB1C22B9FA00E8B44C /* ContentScrollView.m in Sources */,
 				AE3D9CDE1C22BA2000E8B44C /* EarthQuake.m in Sources */,
+				AE3D9CEE1C23D9C800E8B44C /* UIImage+ImageEffects.m in Sources */,
+				AE3D9CEA1C23D8BB00E8B44C /* RangeSelectionView.m in Sources */,
 				AE3D9CE11C22BA3D00E8B44C /* EarthQuakeFetchManager.m in Sources */,
 				AE3D9CE71C23843100E8B44C /* EarthquakeTableViewCell.m in Sources */,
 			);
