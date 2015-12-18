@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '157F2561DC3757059A2590FD'
-               BlueprintName = 'MJRefresh'
+               BlueprintIdentifier = '1CFBA8A104CFDA1C0A3F4DAF'
+               BlueprintName = 'SVPulsingAnnotationView'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libMJRefresh.a'>
+               BuildableName = 'libSVPulsingAnnotationView.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

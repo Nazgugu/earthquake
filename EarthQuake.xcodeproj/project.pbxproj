@@ -24,6 +24,8 @@
 		AE3D9CE71C23843100E8B44C /* EarthquakeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D9CE61C23843100E8B44C /* EarthquakeTableViewCell.m */; };
 		AE3D9CEA1C23D8BB00E8B44C /* RangeSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D9CE91C23D8BB00E8B44C /* RangeSelectionView.m */; };
 		AE3D9CEE1C23D9C800E8B44C /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D9CED1C23D9C800E8B44C /* UIImage+ImageEffects.m */; };
+		AE3D9CF21C23EB7A00E8B44C /* EarthquakeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D9CF01C23EB7A00E8B44C /* EarthquakeDetailViewController.m */; };
+		AE3D9CF31C23EB7A00E8B44C /* EarthquakeDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE3D9CF11C23EB7A00E8B44C /* EarthquakeDetailViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +80,9 @@
 		AE3D9CE91C23D8BB00E8B44C /* RangeSelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RangeSelectionView.m; path = Views/RangeSelectionView.m; sourceTree = "<group>"; };
 		AE3D9CEC1C23D9C800E8B44C /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		AE3D9CED1C23D9C800E8B44C /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		AE3D9CEF1C23EB7A00E8B44C /* EarthquakeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EarthquakeDetailViewController.h; path = VCs/EarthquakeDetailViewController.h; sourceTree = "<group>"; };
+		AE3D9CF01C23EB7A00E8B44C /* EarthquakeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EarthquakeDetailViewController.m; path = VCs/EarthquakeDetailViewController.m; sourceTree = "<group>"; };
+		AE3D9CF11C23EB7A00E8B44C /* EarthquakeDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EarthquakeDetailViewController.xib; path = VCs/EarthquakeDetailViewController.xib; sourceTree = "<group>"; };
 		B8B6957663A93D7A7753FFE2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E4353C85F66B3B63970F8E9E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -235,6 +240,9 @@
 				AE3D9CD11C22B1D400E8B44C /* MainEQViewController.h */,
 				AE3D9CD21C22B1D400E8B44C /* MainEQViewController.m */,
 				AE3D9CD31C22B1D400E8B44C /* MainEQViewController.xib */,
+				AE3D9CEF1C23EB7A00E8B44C /* EarthquakeDetailViewController.h */,
+				AE3D9CF01C23EB7A00E8B44C /* EarthquakeDetailViewController.m */,
+				AE3D9CF11C23EB7A00E8B44C /* EarthquakeDetailViewController.xib */,
 			);
 			name = VC;
 			sourceTree = "<group>";
@@ -354,6 +362,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE3D9CF31C23EB7A00E8B44C /* EarthquakeDetailViewController.xib in Resources */,
 				AE3D9CD51C22B1D400E8B44C /* MainEQViewController.xib in Resources */,
 				AE3D9C9B1C229E7E00E8B44C /* Assets.xcassets in Resources */,
 				AE3D9CC51C22ACDE00E8B44C /* Pilgiche.ttf in Resources */,
@@ -429,6 +438,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE3D9CF21C23EB7A00E8B44C /* EarthquakeDetailViewController.m in Sources */,
 				AE3D9C931C229E7E00E8B44C /* AppDelegate.m in Sources */,
 				AE3D9CD41C22B1D400E8B44C /* MainEQViewController.m in Sources */,
 				AE3D9C901C229E7E00E8B44C /* main.m in Sources */,

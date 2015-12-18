@@ -15,10 +15,12 @@ PODS:
   - AFNetworking/UIKit (3.0.3):
     - AFNetworking/NSURLSession
   - ASValueTrackingSlider (0.11.2)
+  - FDFullscreenPopGesture (1.1)
   - HMSegmentedControl (1.5.2)
   - KNSemiModalViewController_hons82 (0.4.4)
   - MJRefresh (3.0.7)
   - Shimmer (1.0.2)
+  - SVPulsingAnnotationView (0.3.0)
   - THCalendarDatePicker (1.2.5):
     - KNSemiModalViewController_hons82 (~> 0.4.3)
   - WSProgressHUD (1.0.9):
@@ -27,18 +29,22 @@ PODS:
 DEPENDENCIES:
   - AFNetworking
   - ASValueTrackingSlider (~> 0.11.2)
+  - FDFullscreenPopGesture (~> 1.1)
   - HMSegmentedControl (~> 1.5.2)
   - MJRefresh (~> 3.0.7)
+  - SVPulsingAnnotationView (~> 0.3.0)
   - THCalendarDatePicker (~> 1.2.5)
   - WSProgressHUD (~> 1.0.9)
 
 SPEC CHECKSUMS:
   AFNetworking: ba06eb9f27de596808c0acc09e1c920cb1d17ab4
   ASValueTrackingSlider: 45c9f78252da60de01d8f2afe869aaf90dd978d9
+  FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
   HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
   KNSemiModalViewController_hons82: 22aead5ef5d8ca749bc1babb43fa7d6f14b030a3
   MJRefresh: f3e1228ec3d38c7ba5208d58032631a52f39f495
   Shimmer: c5374be1c2b0c9e292fb05b339a513cf291cac86
+  SVPulsingAnnotationView: f1a8dc7a57ebb5fa231d0ef8b0da59a250005511
   THCalendarDatePicker: 65c63c1814d1a27defc89f4b72ec7a1d01d5503d
   WSProgressHUD: 52769c1da5a1033b2bbe67ceea24ff250a6ca34f
 
