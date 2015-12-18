@@ -233,7 +233,7 @@ typedef NS_OPTIONS(NSInteger, dateType) {
 
 - (void)setUpContentScrollView
 {
-    _contentScroll = [[ContentScrollView alloc] initWithFrame:CGRectMake(0, self.topSegment.frame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT - self.topSegment.frame.size.height)];
+    _contentScroll = [[ContentScrollView alloc] initWithFrame:CGRectMake(0, self.topSegment.frame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT - self.topSegment.frame.size.height - [UIApplication sharedApplication].statusBarFrame.size.height)];
     [self.view addSubview:self.contentScroll];
     [self setUpNoDataLabel];
     [self setUpTableView];
